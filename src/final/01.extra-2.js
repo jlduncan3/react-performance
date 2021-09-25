@@ -3,7 +3,7 @@
 // http://localhost:3000/isolated/final/01.extra-2.js
 
 import * as React from 'react'
-
+  
 const Globe = React.lazy(() => import(/* webpackPrefetch: true */ '../globe'))
 
 function App() {

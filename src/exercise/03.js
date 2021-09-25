@@ -23,6 +23,8 @@ function Menu({
           index={index}
           selectedItem={selectedItem}
           highlightedIndex={highlightedIndex}
+          isSelected={selectedItem?.id === item.id}
+          isHighlighted={highlightedIndex === index}
         >
           {item.name}
         </ListItem>
@@ -30,6 +32,7 @@ function Menu({
     </ul>
   )
 }
+Menu = React.memo(Menu)
 // 🐨 Memoize the Menu here using React.memo
 
 function ListItem({
@@ -38,10 +41,10 @@ function ListItem({
   index,
   selectedItem,
   highlightedIndex,
+  isSelected,
+  isHighlighted,
   ...props
 }) {
-  const isSelected = selectedItem?.id === item.id
-  const isHighlighted = highlightedIndex === index
   return (
     <li
       {...getItemProps({
@@ -56,6 +59,8 @@ function ListItem({
     />
   )
 }
+
+ListItem = React.memo(ListItem)
 // 🐨 Memoize the ListItem here using React.memo
 
 function App() {

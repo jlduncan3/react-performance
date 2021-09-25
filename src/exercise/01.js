@@ -3,11 +3,18 @@
 
 import * as React from 'react'
 // 💣 remove this import
-import Globe from '../globe'
+const Globe = React.lazy(() =>
+  import(
+    /* webpackPrefetch: true */
+    /* webpackChunkName: "globe-chunk" */
+    '../globe'
+  ),
+)
 
 // 🐨 use React.lazy to create a Globe component which uses a dynamic import
 // to get the Globe component from the '../globe' module.
 
+const fetchGlobe = () => {}
 function App() {
   const [showGlobe, setShowGlobe] = React.useState(false)
 
@@ -30,13 +37,17 @@ function App() {
         <input
           type="checkbox"
           checked={showGlobe}
+          onMouseEnter={fetchGlobe}
+          onFocus={fetchGlobe}
           onChange={e => setShowGlobe(e.target.checked)}
         />
         {' show globe'}
       </label>
-      <div style={{width: 400, height: 400}}>
-        {showGlobe ? <Globe /> : null}
-      </div>
+      <React.Suspense fallback={<div>Loading globe...</div>}>
+        <div style={{width: 400, height: 400}}>
+          {showGlobe ? <Globe /> : null}
+        </div>
+      </React.Suspense>
     </div>
   )
 }

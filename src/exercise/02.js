@@ -16,15 +16,13 @@ function Menu({
   return (
     <ul {...getMenuProps()}>
       {items.map((item, index) => (
-        <ListItem
+        <ListItem>
           key={item.id}
           getItemProps={getItemProps}
           item={item}
           index={index}
           selectedItem={selectedItem}
           highlightedIndex={highlightedIndex}
-        >
-          {item.name}
         </ListItem>
       ))}
     </ul>
@@ -61,6 +59,8 @@ function App() {
   const [inputValue, setInputValue] = React.useState('')
 
   // 🐨 wrap getItems in a call to `React.useMemo`
+  //const allItems = React.useMemo(() => getItems(inputValue), [inputValue])
+
   const allItems = getItems(inputValue)
   const items = allItems.slice(0, 100)
 
